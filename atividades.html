@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Atividades da Turma</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Entrega 9: Tela de atividades da turma -->
+  <header>
+    <h2>Gerenciar Atividades: Turma 3º Ano A</h2>
+    <a href="./dashboard.html"><button class="btn-secondary">Voltar às Turmas</button></a>
+  </header>
+
+  <!-- Entrega 11: Cadastro de Atividade para a Turma -->
+  <div class="card">
+    <h3>Cadastrar Nova Atividade</h3>
+    <form style="margin-top: 10px;">
+      <input type="text" placeholder="Título da Atividade" required>
+      <textarea placeholder="Descrição da atividade..." rows="3" required></textarea>
+      <label>Data de Entrega:</label>
+      <input type="date" required>
+      <button type="submit">Salvar Atividade</button>
+    </form>
+  </div>
+
+  <!-- Entrega 10: Listar Atividades da Turma -->
+  <div class="card">
+    <h3>Atividades Cadastradas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Data Limite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exercício de Geometria</td>
+          <td>Resolver questões da página 42 do livro didático.</td>
+          <td>15/10/2026</td>
+        </tr>
+        <tr>
+          <td>Prova Mensal</td>
+          <td>Conteúdo referente a Equações do 2º Grau.</td>
+          <td>20/10/2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

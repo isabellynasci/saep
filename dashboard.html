@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel do Professor - Dashboard</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Entrega 5: Tela principal / Entrega 12: Sair (logout) -->
+  <header>
+    <h2>Bem-vindo, Prof. Carlos Silva</h2>
+    <a href="./index.html"><button class="btn-danger">Sair (Logout)</button></a>
+  </header>
+
+  <!-- Entrega 6: Cadastro de Turma -->
+  <div class="card">
+    <h3>Cadastrar Nova Turma</h3>
+    <form id="formTurma" style="margin-top: 10px;">
+      <input type="text" id="nomeTurma" placeholder="Nome da Turma (ex: 3º Ano A)" required>
+      <input type="text" id="disciplinaTurma" placeholder="Disciplina (ex: Matemática)" required>
+      <button type="submit">Cadastrar Turma</button>
+    </form>
+  </div>
+
+  <!-- Entrega 7: Listar Turmas / Entrega 8: Exclusão de Turma -->
+  <div class="card">
+    <h3>Turmas Cadastradas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome da Turma</th>
+          <th>Disciplina</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaTurmas">
+        <!-- As linhas da tabela serão geradas dinamicamente pelo JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Lista inicial de turmas
+    let turmas = [
+      { id: 1, nome: '3º Ano A', disciplina: 'Matemática' },
+      { id: 2, nome: '2º Ano B', disciplina: 'Física' }
+    ];
+
+    // Função para renderizar a tabela
+    function renderizarTabela() {
+      const tbody = document.getElementById('tabelaTurmas');
+      tbody.innerHTML = ''; // Limpa a tabela antes de desenhar
+
+      turmas.forEach((turma) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${turma.id}</td>
+          <td>${turma.nome}</td>
+          <td>${turma.disciplina}</td>
+          <td>
+            <a href="atividades.html?turmaId=${turma.id}"><button>Ver Atividades</button></a>
+            <button class="btn-danger" onclick="excluirTurma(${turma.id})">Excluir</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Funcionalidade de CADASTRAR turma
+    document.getElementById('formTurma').addEventListener('submit', function(e) {
+      e.preventDefault(); // Impede o recarregamento da página
+
+      const nomeInput = document.getElementById('nomeTurma');
+      const disciplinaInput = document.getElementById('disciplinaTurma');
+
+      // Gera um novo ID baseado no último existente
+      const novoId = turmas.length > 0 ? turmas[turmas.length - 1].id + 1 : 1;
+
+      // Adiciona a nova turma na lista
+      turmas.push({
+        id: novoId,
+        nome: nomeInput.value,
+        disciplina: disciplinaInput.value
+      });
+
+      // Limpa os campos do formulário
+      nomeInput.value = '';
+      disciplinaInput.value = '';
+
+      // Atualiza a tabela na tela
+      renderizarTabela();
+    });
+
+    // Funcionalidade de EXCLUIR turma
+    function excluirTurma(id) {
+      if (confirm('Deseja realmente excluir esta turma?')) {
+        // Filtra a lista mantendo apenas as turmas com ID diferente do selecionado
+        turmas = turmas.filter(turma => turma.id !== id);
+        renderizarTabela(); // Atualiza a tabela na tela
+      }
+    }
+
+    // Carrega os dados na tela ao abrir a página
+    renderizarTabela();
+  </script>
+</body>
+</html>
